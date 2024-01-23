@@ -1,0 +1,99 @@
+@use 'variables' as v; 
+
+/** Media Queries **/
+@mixin telefono {
+    @media (min-width: v.$telefono) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (min-width: v.$tablet) {
+        @content;
+    }
+}
+  
+@mixin desktop {
+    @media (min-width: v.$desktop) {
+        @content;
+    }
+}
+
+
+@mixin boton($bgColor, $colorTexto) {
+    background-color: $bgColor;
+    padding: 2rem 2rem;
+    color: $colorTexto;
+    margin-top: 2rem;
+    font-size: 2.2rem;
+    font-weight: 400;
+    display: inline-block;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    transition: background-color;
+    transition-duration: 300ms;
+
+    @include tablet {
+        width: auto;
+    }
+    &:hover {
+        background-color: darken($bgColor, 10%);
+    }
+}
+
+@mixin grid($columnas, $espaciado ) {
+    display: grid;
+    gap: $espaciado;
+    grid-template-columns: repeat($columnas, 1fr);
+}
+
+@mixin headingCursiva {
+    text-align: center;
+    color: v.$secundario;
+    font-family: v.$fuenteCursiva;
+    line-height: .8;
+    font-weight: 400;
+    text-transform: lowercase;
+    font-size: 4rem;
+
+    span {
+        color: v.$negro;
+        display: block;
+        text-transform: uppercase;
+        font-family: v.$fuentePrincipal;
+    }
+}
+
+@mixin heading {
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 400;
+    font-size: 4rem;
+}
+
+
+@mixin bgImage($formato, $cita: false) {
+    @if($cita == false) {
+        $url: '../img/bg_horarios.';
+        $urlImagen: $url + $formato;
+        background-image: linear-gradient(to bottom, v.$primario 0%, v.$primario 50%, transparent 50%), url($urlImagen);
+        background-repeat: no-repeat;
+        background-position: center, bottom center;
+        background-size: calc(100% *6);
+        color: v.$blanco;
+        @include tablet { 
+            background-image: linear-gradient(to right, v.$primario 0%, v.$primario 50%, transparent 50%), url($urlImagen);
+            background-position: top center;
+            background-size: cover;
+        }
+    } @else {
+        $url: '../img/bg_citas.';
+        $urlImagen: $url + $formato;
+        background-image: linear-gradient(to bottom, transparentize(v.$negro, .9%) 0%, transparentize(v.$primario, .9%) 100%), url($urlImagen);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+    }
+}

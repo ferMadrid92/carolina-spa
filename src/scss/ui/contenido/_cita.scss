@@ -1,0 +1,36 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.notwebp.notavif .cita {
+    @include m.bgImage('jpg', true)
+}
+.webp .cita {
+    @include m.bgImage('webp', true)
+}
+.avif .cita {
+    @include m.bgImage('avif', true)
+}
+
+.cita {
+    padding: 5rem 0;
+    text-align: center;
+
+    &__heading {
+        @include m.heading;
+        color: v.$blanco;
+        font-size: 4rem;
+        @include m.tablet { 
+            font-size: 6rem;
+        }
+    }
+    &__enlace {
+        @include m.boton(v.$primario, v.$blanco);
+        padding: 2rem 10rem;
+    }
+    &__texto {
+        color: v.$blanco;
+        max-width: 60rem;
+        margin: 0 auto;
+        line-height: 2;
+    }
+}
